@@ -42,7 +42,7 @@ def create_connection():
         default_settings = {
             'app_name': 'td geo tag',
             'app_version': '1.0.0',
-            'logo_path': '',
+            'app_logo': '',
             'github_repo': ''
         }
         for k, v in default_settings.items():
@@ -96,7 +96,7 @@ def set_setting(key, value):
     conn = create_connection()
     if not conn: return
     cur = conn.cursor()
-    cur.execute("UPDATE app_settings SET value = ? WHERE key = ?", (value, key))
+    cur.execute("INSERT OR REPLACE INTO app_settings (key, value) VALUES (?, ?)", (key, value))
     conn.commit()
     conn.close()
 

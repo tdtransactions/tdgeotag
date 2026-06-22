@@ -33,7 +33,6 @@ for /f "delims=" %%i in ('python -c "import customtkinter; import os; print(os.p
 REM Dong goi voi PyInstaller
 python -m PyInstaller --noconfirm --onedir --windowed --icon="logo.ico" ^
     --name "td geo tag" ^
-    --add-data "store_profiles.db;." ^
     --add-data "%TKDND_PATH%;tkinterdnd2" ^
     --add-data "%CTK_PATH%;customtkinter" ^
     --hidden-import "tkinterdnd2" ^
@@ -46,13 +45,19 @@ echo.
 echo ============================================
 if exist "dist\td geo tag\td geo tag.exe" (
     echo   DONG GOI THANH CONG!
+    if exist "logo.ico" (
+        copy /Y "logo.ico" "dist\td geo tag\" >nul
+    )
+    if exist "store_profiles.db" (
+        copy /Y "store_profiles.db" "dist\td geo tag\" >nul
+    )
     echo.
     echo   File ung dung cua ban nam tai:
     echo   dist\td geo tag\td geo tag.exe
     echo.
     echo   De phat hanh cho nguoi dung:
     echo   1. Copy TOAN BO thu muc "dist\td geo tag" ra noi khac
-    echo   2. Nen (zip) lai va gui cho nguoi khac
+    echo   2. Nen ^(zip^) lai va gui cho nguoi khac
     echo   3. Ho chi can giai nen va bam vao file "td geo tag.exe" la dung!
     echo ============================================
 ) else (
